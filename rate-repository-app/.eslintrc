@@ -12,6 +12,9 @@
   },
   "rules": {
     "react/prop-types": "off",
-    "semi": "error"
+    "semi": "error",
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "eqeqeq": "error",
+    "quotes": ["warn", "single"]
   }
 }
