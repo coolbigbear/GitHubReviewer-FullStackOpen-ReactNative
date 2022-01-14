@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Pressable } from 'react-native';
-import Constants from 'expo-constants';
 import Text from './Text';
 import theme from '../theme';
+import { Link } from 'react-router-native';
 
 const styles = StyleSheet.create({
 	tab: {
@@ -14,13 +14,16 @@ const styles = StyleSheet.create({
 	},
 });
 
-const AppBarTab = ({text}) => {
+const AppBarTab = ({text, route}) => {
 	return (
 		<Pressable
 			onPress={() => {
 				console.log('Pressed');
-			}}>
-            <Text style={styles.tab}>{ text}</Text>
+			}}
+		>
+			<Link to={route}>
+				<Text style={styles.tab}>{text}</Text>
+			</Link>
 		</Pressable>
 	);
 };

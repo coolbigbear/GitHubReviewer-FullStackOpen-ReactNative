@@ -3,25 +3,39 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import theme from '../theme';
 import AppBar from './AppBar';
+import SignIn from './SignIn';
 import RepositoryList from './RespositoryList';
+import { NativeRouter, Switch, Route, Redirect } from 'react-router-native';
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-	flexShrink: 1,
-	backgroundColor: theme.colors.backgroundColorPrimary
-  },
+	container: {
+		flexGrow: 1,
+		flexShrink: 1,
+		backgroundColor: theme.colors.backgroundColorPrimary,
+	},
 });
 
 const Main = () => {
-    return (
-			<View>
-				<AppBar></AppBar>
-				<View style={styles.container}>
-					<RepositoryList></RepositoryList>
-				</View>
-			</View>
-		);
+	return (
+		<>
+			<NativeRouter>
+				<AppBar />
+				<Switch>
+					<Route path="/" exact>
+						<View style={styles.container}>
+							<RepositoryList />
+						</View>
+					</Route>
+					<Route path="/signin" exact>
+						<View style={styles.container}>
+							<SignIn />
+						</View>
+					</Route>
+					<Redirect to="/" />
+				</Switch>
+			</NativeRouter>
+		</>
+	);
 };
 
 export default Main;
