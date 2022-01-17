@@ -5,8 +5,12 @@ import FormikTextInput from './FormikTextInput';
 import Text from './Text';
 import theme from '../theme';
 import * as yup from 'yup';
+import useSignIn from '../hooks/useSignIn';
+import { useHistory } from 'react-router-native';
 
 const SignIn = () => {
+	const [signIn] = useSignIn();
+	const history = useHistory();
 
 	const initialValues = {
 		username: '',
@@ -19,7 +23,7 @@ const SignIn = () => {
 			flexDirection: 'column',
 			alignItems: 'stretch',
 			backgroundColor: 'white',
-			padding: 10
+			padding: 10,
 		},
 		loginButton: {
 			backgroundColor: theme.colors.primary,
@@ -27,30 +31,46 @@ const SignIn = () => {
 			padding: 10,
 			fontWeight: theme.fontWeights.bold,
 			textAlign: 'center',
-			borderRadius: 5
-		}
+			borderRadius: 5,
+		},
 	});
 
 	const validationSchema = yup.object().shape({
-		username: yup
-			.string()
-			.required('Username is required'),
-		password: yup
-			.string()
-			.required('Password is required'),
+		username: yup.string().required('Username is required'),
+		password: yup.string().required('Password is required'),
 	});
 
-	const onSubmit = (values) => {
-		console.log(values);
+	const onSubmit = async (values) => {
+		const { username, password } = values;
+
+		try {
+			await signIn({ username, password });
+			history.push('/');
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	return (
 		<View style={styles.loginForm}>
-			<Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+			<Formik
+				initialValues={initialValues}
+				onSubmit={onSubmit}
+				validationSchema={validationSchema}
+			>
 				{({ handleSubmit }) => (
 					<>
-						<FormikTextInput style={styles.loginInputs} name="username" placeholder="Username" />
-						<FormikTextInput style={styles.loginInputs} name="password" placeholder="Password" secureTextEntry={true}/>
+						<FormikTextInput
+							style={styles.loginInputs}
+							name="username"
+							placeholder="Username"
+						/>
+						<FormikTextInput
+							style={styles.loginInputs}
+							name="password"
+							placeholder="Password"
+							secureTextEntry={true}
+						/>
 						<Pressable onPress={handleSubmit}>
 							<Text style={styles.loginButton}>Sign in</Text>
 						</Pressable>

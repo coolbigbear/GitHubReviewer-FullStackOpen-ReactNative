@@ -5,7 +5,7 @@ import theme from '../theme';
 import AppBar from './AppBar';
 import SignIn from './SignIn';
 import RepositoryList from './RespositoryList';
-import { NativeRouter, Switch, Route, Redirect } from 'react-router-native';
+import { Switch, Route, Redirect, NativeRouter } from 'react-router-native';
 
 const styles = StyleSheet.create({
 	container: {
