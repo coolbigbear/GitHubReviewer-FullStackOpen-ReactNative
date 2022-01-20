@@ -21,7 +21,6 @@ const AppBar = () => {
 	const { data, loading } = useQuery(CHECK_IF_USER_AUTHORIZED);
 
 	const signOut = async () => {
-		console.log('Sign out pressed');
 		await authStorage.removeAccessToken();
 		apolloClient.resetStore();
 	};
@@ -35,7 +34,12 @@ const AppBar = () => {
 				</>
 			);
 		} else {
-			return <AppBarTab text={'Sign in'} route={'/signin'} />;
+			return (
+				<>
+					<AppBarTab text={'Sign in'} route={'/signin'} />
+					<AppBarTab text={'Sign up'} route={'/signup'} />
+				</>
+			);
 		}
 	};
 
