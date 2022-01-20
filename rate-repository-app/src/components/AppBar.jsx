@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-
 	const authStorage = useAuthStorage();
 	const apolloClient = useApolloClient();
 	const { data, loading } = useQuery(CHECK_IF_USER_AUTHORIZED);
@@ -29,7 +28,12 @@ const AppBar = () => {
 
 	const SignInOutTabs = () => {
 		if (!loading && data.authorizedUser) {
-			return <AppBarTab text={'Sign out'} route={'/'} onPress={signOut} />;
+			return (
+				<>
+					<AppBarTab text={'Create a review'} route={'/createReview'} />
+					<AppBarTab text={'Sign out'} route={'/'} onPress={signOut} />
+				</>
+			);
 		} else {
 			return <AppBarTab text={'Sign in'} route={'/signin'} />;
 		}

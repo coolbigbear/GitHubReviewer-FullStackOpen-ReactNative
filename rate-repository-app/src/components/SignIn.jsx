@@ -2,11 +2,10 @@ import { Formik } from 'formik';
 import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import FormikTextInput from './FormikTextInput';
-import Text from './Text';
-import theme from '../theme';
 import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
 import { useHistory } from 'react-router-native';
+import Button from './Button';
 
 export const SignInContainer = ({ signIn, history }) => {
 
@@ -17,19 +16,10 @@ export const SignInContainer = ({ signIn, history }) => {
 
 	const styles = StyleSheet.create({
 		loginForm: {
-			// display: 'flex',
 			flexDirection: 'column',
 			alignItems: 'stretch',
 			backgroundColor: 'white',
 			padding: 10,
-		},
-		loginButton: {
-			backgroundColor: theme.colors.primary,
-			color: 'white',
-			padding: 10,
-			fontWeight: theme.fontWeights.bold,
-			textAlign: 'center',
-			borderRadius: 5,
 		},
 	});
 
@@ -70,7 +60,7 @@ export const SignInContainer = ({ signIn, history }) => {
 							secureTextEntry={true}
 						/>
 						<Pressable onPress={handleSubmit}>
-							<Text style={styles.loginButton}>Sign in</Text>
+							<Button>Sign in</Button>
 						</Pressable>
 					</>
 				)}

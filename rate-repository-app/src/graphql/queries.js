@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-import { CORE_REPOSITORY_FIELDS } from './fragments';
+import { CORE_REPOSITORY_FIELDS, CORE_REVIEW_FIELDS } from './fragments';
 
 export const GET_REPOSITORIES = gql`
 ${CORE_REPOSITORY_FIELDS}
@@ -9,6 +9,24 @@ ${CORE_REPOSITORY_FIELDS}
       edges {
         node {
           ...CoreRepositoryFields
+        }
+      }
+    }
+  }
+`;
+
+export const GET_REPOSITORY = gql`
+${CORE_REPOSITORY_FIELDS}
+${CORE_REVIEW_FIELDS}
+  query repository($id: ID!, $reviews: Boolean!) {    
+    repository(id: $id) {
+      ...CoreRepositoryFields
+      url
+      reviews @include(if: $reviews){
+        edges {
+          node {
+            ...CoreReviewFields
+          }
         }
       }
     }
