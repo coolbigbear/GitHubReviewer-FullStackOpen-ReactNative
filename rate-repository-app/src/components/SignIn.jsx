@@ -8,9 +8,7 @@ import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
 import { useHistory } from 'react-router-native';
 
-const SignIn = () => {
-	const [signIn] = useSignIn();
-	const history = useHistory();
+export const SignInContainer = ({ signIn, history }) => {
 
 	const initialValues = {
 		username: '',
@@ -79,6 +77,13 @@ const SignIn = () => {
 			</Formik>
 		</View>
 	);
+};
+
+const SignIn = () => {
+	const [signIn] = useSignIn();
+	const history = useHistory();
+
+	return <SignInContainer signIn={signIn} history={history} />;
 };
 
 export default SignIn;

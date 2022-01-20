@@ -75,15 +75,6 @@ describe('RepositoryList', () => {
                 expect(repositoryItemStatistics[index].children[3].children[0]).toHaveTextContent('Rating');
                 expect(repositoryItemStatistics[index].children[3].children[0]).toHaveTextContent(formatForThousands(element.ratingAverage));
             });
-
-
-
-            
-            // console.log(firstRepositoryItemStatistics);
-            // expect(firstRepositoryItemStatistics).toHaveTextContent(expectedFirstRepo.forksCount);
-            // expect(firstRepositoryItemStatistics).toHaveTextContent(expectedFirstRepo.stargazersCount);
-            // expect(firstRepositoryItemStatistics).toHaveTextContent(expectedFirstRepo.ratingAverage);
-            // expect(firstRepositoryItemStatistics).toHaveTextContent(expectedFirstRepo.reviewCount);
         });
     });
 });
