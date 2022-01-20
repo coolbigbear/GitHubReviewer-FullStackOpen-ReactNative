@@ -39,7 +39,7 @@ const RepositoryItem = ({ item }) => {
 
 	return (
 		<View style={styles.card}>
-			<View style={{ flexDirection: 'row'}}>
+			<View testID="repositoryItem" style={{ flexDirection: 'row' }}>
 				<Image
 					style={styles.imageStyle}
 					source={{ uri: item.ownerAvatarUrl }}
@@ -50,7 +50,7 @@ const RepositoryItem = ({ item }) => {
 					<Text style={styles.languageInfo}>{item.language}</Text>
 				</View>
 			</View>
-			<View style={styles.bottomInfo}>
+			<View testID="repositoryItemStatistic" style={styles.bottomInfo}>
 				<RepositoryItemStatistic
 					heading={item.stargazersCount}
 					subheading={'Stars'}
