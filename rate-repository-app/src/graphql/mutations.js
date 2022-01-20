@@ -12,7 +12,7 @@ export const CREATE_REVIEW = gql`
   mutation CreateReview($createReviewInput: CreateReviewInput) {
     createReview(review: $createReviewInput) {
       repository {
-        url
+        id
       }
     }
   }

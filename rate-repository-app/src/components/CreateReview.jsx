@@ -52,8 +52,7 @@ const CreateReview = () => {
 				rating: Number(rating),
                 text: reviewText,
 			});
-			console.log('nice: ', result);
-			history.push(`/repository/${result.data.createReview.repository.url}`);
+			history.push(`/repositories/${result.data.createReview.repository.id}`);
 		} catch (e) {
 			console.log(e);
 		}
