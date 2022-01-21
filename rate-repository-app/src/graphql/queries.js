@@ -4,12 +4,22 @@ import { CORE_REPOSITORY_FIELDS, CORE_REVIEW_FIELDS } from './fragments';
 
 export const GET_REPOSITORIES = gql`
 ${CORE_REPOSITORY_FIELDS}
-  query getRepositories($orderBy: AllRepositoriesOrderBy = CREATED_AT, $orderDirection: OrderDirection = DESC, $searchKeyword: String){
-    repositories(searchKeyword: $searchKeyword, orderBy: $orderBy, orderDirection: $orderDirection) {
+  query getRepositories($orderBy: AllRepositoriesOrderBy = CREATED_AT, 
+                        $orderDirection: OrderDirection = DESC, 
+                        $searchKeyword: String,
+                        $first: Int,
+                        $after: String){
+    repositories(after: $after, first: $first, searchKeyword: $searchKeyword, orderBy: $orderBy, orderDirection: $orderDirection) {
       edges {
         node {
           ...CoreRepositoryFields
         }
+        cursor
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
       }
     }
   }
