@@ -28,26 +28,46 @@ ${CORE_REPOSITORY_FIELDS}
 export const GET_REPOSITORY = gql`
 ${CORE_REPOSITORY_FIELDS}
 ${CORE_REVIEW_FIELDS}
-  query repository($id: ID!, $reviews: Boolean!) {    
+  query repository($id: ID!, $reviews: Boolean!, $after: String, $first: Int) {    
     repository(id: $id) {
       ...CoreRepositoryFields
       url
-      reviews @include(if: $reviews){
+      reviews(first: $first, after: $after) @include(if: $reviews) {
         edges {
           node {
             ...CoreReviewFields
           }
+          cursor
+        }
+        pageInfo {
+          endCursor
+          startCursor
+          hasNextPage
         }
       }
     }
   }
 `;
 
-export const CHECK_IF_USER_AUTHORIZED = gql`
-  query {
+export const GET_USER = gql`
+${CORE_REVIEW_FIELDS}
+  query getCurrentUser($includeReviews: Boolean = false, $first: Int, $after: String){
     authorizedUser {
       id
       username
+      reviews(first: $first, after: $after) @include(if: $includeReviews) {
+        edges {
+          node {
+            ...CoreReviewFields
+          }
+          cursor
+        }
+        pageInfo {
+          endCursor
+          startCursor
+          hasNextPage
+        }
+      }
     }
   }
 `;

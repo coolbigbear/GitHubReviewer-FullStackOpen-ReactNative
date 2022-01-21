@@ -9,6 +9,7 @@ import { Switch, Route, Redirect, NativeRouter } from 'react-router-native';
 import SingleRepository from './SingleRepository';
 import CreateReview from './CreateReview';
 import SignUp from './SignUp';
+import ReviewList from './ReviewList';
 
 const styles = StyleSheet.create({
 	container: {
@@ -47,6 +48,11 @@ const Main = () => {
 					<Route path="/createReview" exact>
 						<View style={styles.container}>
 							<CreateReview />
+						</View>
+					</Route>
+					<Route path="/myReviews" exact>
+						<View style={styles.container}>
+							<ReviewList />
 						</View>
 					</Route>
 					<Redirect to="/" />

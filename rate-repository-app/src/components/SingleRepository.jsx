@@ -8,28 +8,36 @@ import ReviewItem from './ReviewItem';
 
 const SingleRepository = () => {
 	const { id } = useParams();
-	const { repository, error, loading } = useRepository(id, true);
+	const { repository, fetchMore } = useRepository({ id, reviews: true, first: 10 });
 
-	if (error || loading || !repository) {
-		return null;
-	} else {
-		const reviews = repository.reviews.edges;
-		return (
-			<FlatList
-				data={reviews}
-				renderItem={({ item }) => <ReviewItem item={item.node} />}
-				ItemSeparatorComponent={() => <ItemSeparator />}
-				keyExtractor={(item) => item.node.id}
-				ListHeaderComponent={() => (
-					<>
-						<RepositoryItem item={repository} openInGithubButton={true} />
-						<ItemSeparator />
-					</>
-				)}
-				// ...
-			/>
-		);
+	const reviews = repository
+		? repository.reviews.edges.map((edge) => edge.node)
+		: [];
+	
+	const onEndReached = () => {
+		fetchMore();
 	}
+	
+	return (
+		<FlatList
+			data={reviews}
+			renderItem={({ item }) => <ReviewItem item={item} />}
+			ItemSeparatorComponent={() => <ItemSeparator />}
+			keyExtractor={(item) => item.id}
+			onEndReached={onEndReached}
+			onEndReachedThreshold={0.1}
+			ListHeaderComponent={() => (
+				<>
+					{repository && (
+						<>
+							<RepositoryItem item={repository} openInGithubButton={true} />
+							<ItemSeparator />
+						</>
+					)}
+				</>
+			)}
+		/>
+	);
 };
 
 export default SingleRepository;

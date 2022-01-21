@@ -5,7 +5,7 @@ import theme from '../theme';
 import AppBarTab from './AppBarTab';
 import { useApolloClient, useQuery } from '@apollo/client';
 import useAuthStorage from '../hooks/useAuthStorage';
-import { CHECK_IF_USER_AUTHORIZED } from '../graphql/queries';
+import { GET_USER } from '../graphql/queries';
 
 const styles = StyleSheet.create({
 	container: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 const AppBar = () => {
 	const authStorage = useAuthStorage();
 	const apolloClient = useApolloClient();
-	const { data, loading } = useQuery(CHECK_IF_USER_AUTHORIZED);
+	const { data, loading } = useQuery(GET_USER);
 
 	const signOut = async () => {
 		await authStorage.removeAccessToken();
@@ -29,6 +29,7 @@ const AppBar = () => {
 		if (!loading && data.authorizedUser) {
 			return (
 				<>
+					<AppBarTab text={'My reviews'} route={'/myReviews'} />
 					<AppBarTab text={'Create a review'} route={'/createReview'} />
 					<AppBarTab text={'Sign out'} route={'/'} onPress={signOut} />
 				</>
