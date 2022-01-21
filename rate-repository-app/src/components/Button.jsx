@@ -25,12 +25,13 @@ const styles = StyleSheet.create({
 	},
 });
 
-const Button = ({ color, fontSize, fontWeight, ...props }) => {
+const Button = ({ color, fontSize, fontWeight, style, ...props }) => {
 	const textStyle = [
 		styles.text,
 		color === 'primary' && styles.colorPrimary,
 		fontSize === 'subheading' && styles.fontSizeSubheading,
-		fontWeight === 'bold' && styles.fontWeightBold
+		fontWeight === 'bold' && styles.fontWeightBold,
+		style
 	];
 
 	return <NativeText style={textStyle} {...props} />;

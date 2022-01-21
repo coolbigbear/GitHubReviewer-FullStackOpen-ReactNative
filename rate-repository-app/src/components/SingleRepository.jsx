@@ -14,7 +14,6 @@ const SingleRepository = () => {
 		return null;
 	} else {
 		const reviews = repository.reviews.edges;
-		console.log(reviews);
 		return (
 			<FlatList
 				data={reviews}

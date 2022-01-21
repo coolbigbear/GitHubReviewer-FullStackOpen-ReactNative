@@ -42,7 +42,6 @@ const CreateReview = () => {
 	});
 
     const onSubmit = async (values) => {
-        console.log(values);
 		const { repositoryOwnerName, repositoryName, rating, reviewText } = values;
 
 		try {

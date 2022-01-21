@@ -1,28 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDebounce } from 'use-debounce';
 import { FlatList, View, StyleSheet } from 'react-native';
-import useRepositories from '../hooks/useRespositories';
+import useRepositories from '../hooks/useRepositories';
+import Sort from './Sort';
 import ItemSeparator from './ItemSeparator';
 import RepositoryItem from './RepositoryItem';
+import { Searchbar } from 'react-native-paper';
 
-export const RepositoryListContainer = ({ repositories }) => {
-	const repositoryNodes = repositories
-		? repositories.edges.map((edge) => edge.node)
-		: [];
+export class RepositoryListContainer extends React.Component {
+	renderHeader = () => {
+		const search = this.props.search;
+		const setSearch = this.props.setSearch;
+		const selectedSorting = this.props.selectedSorting;
+		const setSelectedSorting = this.props.setSelectedSorting;
 
-	return (
-		<FlatList
-			data={repositoryNodes}
-			ItemSeparatorComponent={() => <ItemSeparator/>}
-			keyExtractor={(item) => item.id}
-			renderItem={({ item }) => <RepositoryItem item={item} />}
-		/>
-	);
-};
+		return (
+			<>
+				<Searchbar
+					placeholder="Search"
+					onChangeText={(query) => setSearch(query)}
+					value={search}
+					style={{ margin: 10 }}
+				/>
+				<Sort
+					selectedSorting={selectedSorting}
+					setSelectedSorting={setSelectedSorting}
+				/>
+			</>
+		);
+	};
+
+	render() {
+		const repositoryNodes = this.props.repositories
+			? this.props.repositories.edges.map((edge) => edge.node)
+			: [];
+
+		return (
+			<FlatList
+				data={repositoryNodes}
+				ListHeaderComponent={this.renderHeader()}
+				ItemSeparatorComponent={() => <ItemSeparator />}
+				keyExtractor={(item) => item.id}
+				renderItem={({ item }) => <RepositoryItem item={item} />}
+			/>
+		);
+	}
+}
 
 const RepositoryList = () => {
-	const { repositories } = useRepositories();
+	const [selectedSorting, setSelectedSorting] = useState({
+		sorting: {
+			orderBy: 'CREATED_AT',
+			orderDirection: 'DESC',
+			value: 'latest',
+		},
+	});
+	const [search, setSearch] = useState('');
+	const [deBouncedSearch] = useDebounce(search, 500);
+	const { repositories } = useRepositories(
+		selectedSorting.sorting.orderBy,
+		selectedSorting.sorting.orderDirection,
+		deBouncedSearch
+	);
 
-	return <RepositoryListContainer repositories={repositories} />;
+	return (
+		<RepositoryListContainer
+			repositories={repositories}
+			selectedSorting={selectedSorting}
+			setSelectedSorting={setSelectedSorting}
+			search={search}
+			setSearch={setSearch}
+		/>
+	);
 };
 
 export default RepositoryList;
