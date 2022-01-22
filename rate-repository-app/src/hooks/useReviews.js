@@ -3,7 +3,7 @@ import { GET_USER } from '../graphql/queries';
 
 const useReviews = (variables) => {
 
-    const { data, error, loading, fetchMore } = useQuery(GET_USER, {
+    const { data, error, loading, fetchMore, refetch } = useQuery(GET_USER, {
         variables,
         fetchPolicy: 'cache-and-network',
     });
@@ -21,8 +21,7 @@ const useReviews = (variables) => {
         });
     };
 
-    console.log(data);
-    return { reviews: data?.authorizedUser.reviews, fetchMore: handleFetchMore };
+    return { reviews: data?.authorizedUser.reviews, fetchMore: handleFetchMore, refetch };
 };
 
 export default useReviews;

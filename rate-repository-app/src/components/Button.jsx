@@ -11,8 +11,12 @@ const styles = StyleSheet.create({
 		fontFamily: theme.fonts.main,
 		fontWeight: theme.fontWeights.bold,
         backgroundColor: theme.colors.primary,
-        padding: 10,
-        borderRadius: 5
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 15,
+        paddingBottom: 15,
+		borderRadius: 5,
+		margin: 10
     },
 	colorPrimary: {
 		color: theme.colors.primary,
