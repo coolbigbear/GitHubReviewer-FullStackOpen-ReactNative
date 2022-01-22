@@ -52,7 +52,7 @@ ${CORE_REVIEW_FIELDS}
 export const GET_USER = gql`
 ${CORE_REVIEW_FIELDS}
   query getCurrentUser($includeReviews: Boolean = false, $first: Int, $after: String){
-    authorizedUser {
+    me {
       id
       username
       reviews(first: $first, after: $after) @include(if: $includeReviews) {

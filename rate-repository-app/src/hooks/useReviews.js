@@ -9,19 +9,19 @@ const useReviews = (variables) => {
     });
 
     const handleFetchMore = () => {
-        const canFetchMore = !loading && data?.authorizedUser.reviews.pageInfo.hasNextPage;
+        const canFetchMore = !loading && data?.me.reviews.pageInfo.hasNextPage;
         if (!canFetchMore) {
             return;
         }
         fetchMore({
             variables: {
-                after: data.authorizedUser.reviews.pageInfo.endCursor,
+                after: data.me.reviews.pageInfo.endCursor,
                 ...variables,
             },
         });
     };
 
-    return { reviews: data?.authorizedUser.reviews, fetchMore: handleFetchMore, refetch };
+    return { reviews: data?.me.reviews, fetchMore: handleFetchMore, refetch };
 };
 
 export default useReviews;

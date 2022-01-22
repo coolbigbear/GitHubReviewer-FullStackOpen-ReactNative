@@ -26,7 +26,7 @@ const AppBar = () => {
 	};
 
 	const SignInOutTabs = () => {
-		if (!loading && data.authorizedUser) {
+		if (!loading && data.me) {
 			return (
 				<>
 					<AppBarTab text={'My reviews'} route={'/myReviews'} />

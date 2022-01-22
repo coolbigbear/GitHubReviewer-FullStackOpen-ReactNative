@@ -16,7 +16,7 @@ export default function useSignIn() {
                     password
             } }
         });
-        let authToken = response.data.authorize.accessToken;
+        let authToken = response.data.authenticate.accessToken;
 
         await authStorage.setAccessToken(authToken);
         apolloClient.resetStore();
