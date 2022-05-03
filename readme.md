@@ -1,5 +1,6 @@
 # React Native - GitHub Repository Reviewer
 An application allowing user to rate github repositories, leave comments and view general repository info
+
 https://user-images.githubusercontent.com/23392841/166515719-f612ab62-333f-49c0-af75-8cafbd60f05f.mp4
 
 # Stack
