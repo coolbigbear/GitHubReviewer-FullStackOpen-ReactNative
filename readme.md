@@ -1,7 +1,8 @@
 # React Native - GitHub Repository Reviewer
 An application allowing user to rate github repositories, leave comments and view general repository info
 
-[![Features-Demo](https://img.youtube.com/vi/A35AoBBsKRg/maxresdefault.jpg)](https://youtu.be/A35AoBBsKRg)
+https://github.com/coolbigbear/GitHubReviewer-FullStackOpen-ReactNative/assets/23392841/55cd2313-22ce-4d80-95ec-289b2bd99bb1
+
 
 # Stack
 - Built using React Native
